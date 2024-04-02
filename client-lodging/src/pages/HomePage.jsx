@@ -1,4 +1,4 @@
-export default HomePage = () => {
+const HomePage = () => {
     return (
         <>
             <div className="container my-5">
@@ -14,9 +14,7 @@ export default HomePage = () => {
 
                             <div className="card-body">
                                 <h5 className="card-title">KetaBo Kost</h5>
-                                <p className="card-text">
-                                    KETAMADA RAP RAP KOST
-                                </p>
+                                <p className="card-text">Rp 3.000.000</p>
                             </div>
                         </div>
                     </div>
@@ -25,3 +23,5 @@ export default HomePage = () => {
         </>
     );
 };
+
+export default HomePage;
