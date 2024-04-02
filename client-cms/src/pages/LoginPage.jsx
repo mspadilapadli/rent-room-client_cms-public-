@@ -4,7 +4,15 @@ export default function LoginPage() {
         <>
             <div className="container-fluid">
                 <form className="mx-auto">
-                    <h4 className="text-center mb-5">Welcome</h4>
+                    <h4 className="text-center">Welcome</h4>
+                    <div className="d-flex justify-content-center">
+                        <img
+                            src="https://thumbs.dreamstime.com/z/room-rent-sign-isolated-white-background-simple-vector-logo-room-rent-sign-isolated-white-background-221788015.jpg"
+                            style={{ width: "7rem" }}
+                            className="mx-auto"
+                            alt=""
+                        />
+                    </div>
                     <div className="mb-3 mt-5">
                         <label
                             htmlFor="exampleInputEmail1"
