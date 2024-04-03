@@ -5,7 +5,7 @@ export default function Card({ e, hitDetail }) {
                 <div
                     className="card"
                     onClick={() => {
-                        hitDetail();
+                        hitDetail(e);
                     }}
                 >
                     <img
@@ -21,7 +21,14 @@ export default function Card({ e, hitDetail }) {
                         <h5 className="card-title">{e.name}</h5>
                         <p className="card-text">Rp {e.price}</p>
                         <p className="card-text">Location : {e.location}</p>
-                        {/* <button>detail</button> */}
+                        {/* <button
+                            className="btn btn-outline-warning"
+                            onClick={() => {
+                                hitDetail();
+                            }}
+                        >
+                            Detail
+                        </button> */}
                     </div>
                 </div>
             </div>
