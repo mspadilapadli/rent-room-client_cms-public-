@@ -8,12 +8,17 @@ import DetailPage from "./pages/DetailPage";
 
 function App() {
     const [count, setCount] = useState(0);
+    const [isDetail, setIsDetail] = useState(false);
+
+    function hitDetail() {
+        setIsDetail(true);
+    }
 
     return (
         <>
             <Navbar />
-            <HomePage />
-            <DetailPage />
+            {isDetail && <DetailPage />}
+            <HomePage hitDetail={hitDetail} />
         </>
     );
 }
