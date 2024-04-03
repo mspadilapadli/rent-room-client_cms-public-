@@ -7,22 +7,29 @@ import HomePage from "./pages/HomePage";
 import DetailPage from "./pages/DetailPage";
 
 function App() {
-    const [count, setCount] = useState(0);
+    const [page, setPage] = useState(`home`);
     const [isDetail, setIsDetail] = useState(false);
     const [dataDetail, setDataDetail] = useState({});
 
     function hitDetail(data) {
+        setPage(``);
         setIsDetail(true);
         if (data) {
             setDataDetail(data);
         }
     }
+    function closeDetail() {
+        setIsDetail(false);
+        setPage(`home`);
+    }
 
     return (
         <>
             <Navbar />
-            {isDetail && <DetailPage dataDetail={dataDetail} />}
-            <HomePage hitDetail={hitDetail} />
+            {isDetail && (
+                <DetailPage dataDetail={dataDetail} closeDetail={closeDetail} />
+            )}
+            {page === `home` && <HomePage hitDetail={hitDetail} />}
         </>
     );
 }

@@ -1,9 +1,34 @@
+import { useState } from "react";
+import axios from "axios";
+
 import "./login.css";
 export default function LoginPage() {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const submitLogin = async (e) => {
+        e.preventDefault();
+        try {
+            // console.log(`submin jalan ni bos`);
+            let { data } = await axios({
+                method: "post",
+                url: "http://localhost:3000/users/login",
+                data: {
+                    email: email,
+                    password: password,
+                },
+            });
+            console.log(data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
         <>
             <div className="container-fluid">
-                <form className="mx-auto">
+                <form className="mx-auto" onSubmit={submitLogin}>
+                    {/* {email} && {password} */}
                     <h4 className="text-center">Welcome</h4>
                     <div className="d-flex justify-content-center">
                         <img
@@ -25,6 +50,8 @@ export default function LoginPage() {
                             className="form-control"
                             id="exampleInputEmail1"
                             aria-describedby="emailHelp"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                         />
                     </div>
                     <div className="mb-3">
@@ -38,6 +65,8 @@ export default function LoginPage() {
                             type="password"
                             className="form-control"
                             id="exampleInputPassword1"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
                     <button type="submit" className="btn btn-primary mt-5 mb-5">

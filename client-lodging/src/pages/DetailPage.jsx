@@ -1,4 +1,4 @@
-export default function DetailPage({ dataDetail }) {
+export default function DetailPage({ dataDetail, closeDetail }) {
     return (
         <>
             <section id="detail">
@@ -7,7 +7,7 @@ export default function DetailPage({ dataDetail }) {
                         <h4>Detail Room</h4>
                         <div className="d-flex gap-4">
                             <img
-                                src="https://img.freepik.com/free-photo/mockup-frames-living-room-interior-with-chair-decorscandinavian-style_41470-5148.jpg?t=st=1711982453~exp=1711986053~hmac=98ab75bb1c4534b808275f2ab34efc1e0ab2c45e57c924dc878cb72600c64fd3&w=740"
+                                src={dataDetail.imgUrl}
                                 style={{ height: "22rem", objectFit: "cover" }}
                                 alt=""
                             />
@@ -23,6 +23,14 @@ export default function DetailPage({ dataDetail }) {
                             </div>
                         </div>
                     </div>
+                    <button
+                        className="btn btn-warning mt-2"
+                        onClick={() => {
+                            closeDetail();
+                        }}
+                    >
+                        Back
+                    </button>
                 </div>
             </section>
         </>
