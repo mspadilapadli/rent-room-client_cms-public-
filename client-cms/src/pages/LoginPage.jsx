@@ -2,23 +2,15 @@ import { useState } from "react";
 import axios from "axios";
 
 import "./login.css";
-export default function LoginPage() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+export default function LoginPage({ handleLogin }) {
+    const [email, setEmail] = useState("admin@gmail.com");
+    const [password, setPassword] = useState("12345");
 
     const submitLogin = async (e) => {
         e.preventDefault();
         try {
             // console.log(`submin jalan ni bos`);
-            let { data } = await axios({
-                method: "post",
-                url: "http://localhost:3000/users/login",
-                data: {
-                    email: email,
-                    password: password,
-                },
-            });
-            console.log(data);
+            handleLogin({ email, password });
         } catch (error) {
             console.log(error);
         }

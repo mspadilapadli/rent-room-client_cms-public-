@@ -1,5 +1,30 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
 import "./templete.css";
-export default function LodgingsPage() {
+export default function LodgingsPage({ accessToken }) {
+    const [dataLodgings, setDataLodgings] = useState(null);
+
+    const fetchLodgings = async () => {
+        try {
+            const { data } = await axios({
+                method: "get",
+                url: "http://localhost:3000/lodgings",
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            });
+            console.log(accessToken);
+            setDataLodgings(data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        fetchLodgings();
+    }, []);
+    console.log(dataLodgings);
+
     return (
         <>
             <section className="container" id="home-section">
