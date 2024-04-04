@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import "./login.css";
+import showToast from "../utils/toast";
 
 export default function LoginPage({ setStatusLogin }) {
     const [email, setEmail] = useState("admin@gmail.com");
@@ -25,6 +26,7 @@ export default function LoginPage({ setStatusLogin }) {
             setStatusLogin(true);
         } catch (error) {
             console.log(error);
+            showToast(error.response.data.message);
         }
     };
 
