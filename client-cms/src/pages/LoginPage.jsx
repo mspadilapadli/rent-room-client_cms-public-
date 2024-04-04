@@ -16,7 +16,8 @@ export default function LoginPage({ setStatusLogin }) {
             // handleLogin({ email, password });
             let { data } = await axios({
                 method: "post",
-                url: "http://localhost:3000/users/login",
+                url: "https://server-myroom.mspadilapadli-dev.online/users/login",
+                // url: "http://localhost:3000/users/login",
                 data: {
                     email: email,
                     password: password,

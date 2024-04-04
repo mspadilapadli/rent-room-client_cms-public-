@@ -1,4 +1,6 @@
 import { useState } from "react";
+import showToast from "../utils/toast";
+import axios from "axios";
 
 export default function RegsiterPage() {
     const [input, setInput] = useState({
@@ -17,6 +19,26 @@ export default function RegsiterPage() {
         });
     };
 
+    const handleForm = async (event) => {
+        event.preventDefault();
+        try {
+            await axios({
+                method: "post",
+                url: "https://server-myroom.mspadilapadli-dev.online/users/add-user",
+                // url: "http://localhost:3000/users/add-user",
+                data: input,
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+            });
+            console.log("new data created");
+            console.log(input, "<<<input form");
+        } catch (error) {
+            console.log(error);
+            showToast(error.response.data.message);
+        }
+    };
+
     return (
         <>
             {/* New User Section */}
@@ -24,19 +46,16 @@ export default function RegsiterPage() {
                 className="col-md-9 ms-sm-auto col-lg-10 px-md-4"
                 id="new-user-section"
             >
-                <div>username : {input.username}</div>
+                {/* <div>username : {input.username}</div>
                 <div>email : {input.email}</div>
                 <div>password : {input.password}</div>
                 <div>phoneNumber : {input.phoneNumber}</div>
-                <div>address : {input.address}</div>
+                <div>address : {input.address}</div> */}
 
                 <div className="row">
                     <div className="col-12 col-md-6">
                         <div className="pt-3 pb-2 mb-3 border-bottom">
-                            <form
-                                id="register-form"
-                                onSubmit={handleInputRegister}
-                            >
+                            <form id="register-form" onSubmit={handleForm}>
                                 <h1 className="h3 mb-3 display-1">
                                     Register User
                                 </h1>
@@ -128,7 +147,6 @@ export default function RegsiterPage() {
                                         rows={3}
                                         placeholder="Enter address (optional) ..."
                                         autoComplete="off"
-                                        defaultValue={""}
                                         name="address"
                                         value={input.address}
                                         onChange={handleInputRegister}

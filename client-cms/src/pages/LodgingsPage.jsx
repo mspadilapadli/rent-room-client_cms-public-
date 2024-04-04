@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "./templete.css";
 import Table from "../components/Table";
+import showToast from "../utils/toast";
+
 export default function LodgingsPage() {
     const [dataLodgings, setDataLodgings] = useState(null);
 
@@ -9,7 +11,8 @@ export default function LodgingsPage() {
         try {
             const { data } = await axios({
                 method: "get",
-                url: "http://localhost:3000/lodgings",
+                // url: "http://localhost:3000/lodgings",
+                url: "https://server-myroom.mspadilapadli-dev.online/lodgings",
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
@@ -18,6 +21,7 @@ export default function LodgingsPage() {
             setDataLodgings(data);
         } catch (error) {
             console.log(error);
+            showToast(error.response.data.message);
         }
     };
 
