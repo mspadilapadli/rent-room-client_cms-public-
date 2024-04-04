@@ -24,7 +24,7 @@ function App() {
 
     return (
         <>
-            <Navbar />
+            {/* <Navbar /> */}
             {isDetail && (
                 <DetailPage dataDetail={dataDetail} closeDetail={closeDetail} />
             )}

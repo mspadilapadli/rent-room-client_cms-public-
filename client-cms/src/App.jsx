@@ -3,10 +3,53 @@ import LoginPage from "./pages/LoginPage";
 import LodgingsPage from "./pages/LodgingsPage";
 import AddRoomPage from "./pages/AddRoomPage";
 import RegsiterPage from "./pages/RegisterPage";
-
+import Types from "./pages/TypesPage";
 import Navbar from "./components/Navbar";
+import {
+    createBrowserRouter,
+    redirect,
+    RouterProvider,
+} from "react-router-dom";
+import MainLayout from "./components/MainLayout";
 // import './App.css'
 // import "./pages/templete.css";
+
+const router = createBrowserRouter([
+    {
+        element: <MainLayout />,
+        loader: () => {
+            if (!localStorage.token) {
+                return redirect("/login");
+            }
+            return null;
+        },
+
+        children: [
+            {
+                path: "/",
+                element: <LodgingsPage />,
+            },
+            {
+                path: "/types",
+                element: <Types />,
+            },
+            {
+                path: "/register",
+                element: <RegsiterPage />,
+            },
+        ],
+    },
+    {
+        path: "/login",
+        element: <LoginPage />,
+        loader: () => {
+            if (localStorage.token) {
+                return redirect("/");
+            }
+            return null;
+        },
+    },
+]);
 
 function App() {
     const [isLogin, setIsLogin] = useState(false);
@@ -36,23 +79,26 @@ function App() {
         setIsLogin(status);
     };
 
+    // use useEffect yg create / fetch data
     useEffect(() => {
         if (localStorage.getItem("token")) {
             setIsLogin(true);
         }
-    });
+    }, []);
 
     return (
         <>
-            <Navbar setStatusLogin={setStatusLogin} />
+            <RouterProvider router={router} />
+            {/* <Navbar setStatusLogin={setStatusLogin} />
             {isLogin ? (
                 <LodgingsPage />
             ) : (
                 <LoginPage setStatusLogin={setStatusLogin} />
-            )}
+            )} */}
 
             {/* <RegsiterPage /> */}
             {/* <AddRoomPage /> */}
+            {/* <Types /> */}
         </>
     );
 }

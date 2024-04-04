@@ -1,4 +1,22 @@
+import { useState } from "react";
+
 export default function RegsiterPage() {
+    const [input, setInput] = useState({
+        username: "",
+        email: "",
+        password: "",
+        phoneNumber: "",
+        address: "",
+    });
+
+    const handleInputRegister = (event) => {
+        const { name, value } = event.target;
+        setInput({
+            ...input,
+            [name]: value,
+        });
+    };
+
     return (
         <>
             {/* New User Section */}
@@ -6,10 +24,19 @@ export default function RegsiterPage() {
                 className="col-md-9 ms-sm-auto col-lg-10 px-md-4"
                 id="new-user-section"
             >
+                <div>username : {input.username}</div>
+                <div>email : {input.email}</div>
+                <div>password : {input.password}</div>
+                <div>phoneNumber : {input.phoneNumber}</div>
+                <div>address : {input.address}</div>
+
                 <div className="row">
                     <div className="col-12 col-md-6">
                         <div className="pt-3 pb-2 mb-3 border-bottom">
-                            <form id="register-form">
+                            <form
+                                id="register-form"
+                                onSubmit={handleInputRegister}
+                            >
                                 <h1 className="h3 mb-3 display-1">
                                     Register User
                                 </h1>
@@ -29,6 +56,9 @@ export default function RegsiterPage() {
                                         placeholder="Enter username ..."
                                         autoComplete="off"
                                         required=""
+                                        name="username"
+                                        value={input.username}
+                                        onChange={handleInputRegister}
                                     />
                                 </div>
                                 <div className="mb-3">
@@ -47,6 +77,9 @@ export default function RegsiterPage() {
                                         placeholder="Enter email address ..."
                                         autoComplete="off"
                                         required=""
+                                        name="email"
+                                        value={input.email}
+                                        onChange={handleInputRegister}
                                     />
                                 </div>
                                 <div className="mb-3">
@@ -65,6 +98,9 @@ export default function RegsiterPage() {
                                         placeholder="Enter password ..."
                                         autoComplete="off"
                                         required=""
+                                        name="password"
+                                        value={input.password}
+                                        onChange={handleInputRegister}
                                     />
                                 </div>
                                 <div className="mb-3">
@@ -77,6 +113,9 @@ export default function RegsiterPage() {
                                         id="register-phone"
                                         placeholder="Enter phone number (optional) ..."
                                         autoComplete="off"
+                                        name="phoneNumber"
+                                        value={input.phoneNumber}
+                                        onChange={handleInputRegister}
                                     />
                                 </div>
                                 <div className="mb-3">
@@ -90,6 +129,9 @@ export default function RegsiterPage() {
                                         placeholder="Enter address (optional) ..."
                                         autoComplete="off"
                                         defaultValue={""}
+                                        name="address"
+                                        value={input.address}
+                                        onChange={handleInputRegister}
                                     />
                                 </div>
                                 <button

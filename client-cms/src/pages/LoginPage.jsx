@@ -1,11 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
-import "./login.css";
+// import "./login.css";
 import showToast from "../utils/toast";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage({ setStatusLogin }) {
     const [email, setEmail] = useState("admin@gmail.com");
     const [password, setPassword] = useState("12345");
+    const navigate = useNavigate();
 
     const submitLogin = async (e) => {
         e.preventDefault();
@@ -21,6 +23,7 @@ export default function LoginPage({ setStatusLogin }) {
                 },
             });
             localStorage.setItem("token", data.access_token);
+            navigate("/");
             // setAccessToken(data.access_token);
             // setIsLogin(true); ganti
             setStatusLogin(true);
@@ -35,7 +38,7 @@ export default function LoginPage({ setStatusLogin }) {
             <div className="container-fluid">
                 <form className="mx-auto" onSubmit={submitLogin}>
                     {/* {email} && {password} */}
-                    <h4 className="text-center">Welcome</h4>
+                    {/* <h4 className="text-center">Welcome</h4> */}
                     <div className="d-flex justify-content-center">
                         <img
                             src="https://thumbs.dreamstime.com/z/room-rent-sign-isolated-white-background-simple-vector-logo-room-rent-sign-isolated-white-background-221788015.jpg"

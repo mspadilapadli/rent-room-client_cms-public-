@@ -9,8 +9,8 @@ const HomePage = ({ hitDetail }) => {
         try {
             const { data } = await axios({
                 method: "get",
-                url: "http://localhost:3000/pub/lodgings",
-                // url: "https://server-myroom.mspadilapadli-dev.online/pub/lodgings",
+                // url: "http://localhost:3000/pub/lodgings",
+                url: "https://server-myroom.mspadilapadli-dev.online/pub/lodgings",
             });
 
             setPubLodgings(data);
@@ -27,7 +27,7 @@ const HomePage = ({ hitDetail }) => {
     return (
         <>
             <div className="container my-5">
-                <h2 className="text-center my-5">WELCOME</h2>
+                <h2 className="text-center my-5">MyRent Room</h2>
                 <div className="row row-cols-4 g-3">
                     {pubLodgings &&
                         pubLodgings.map((e) => {
