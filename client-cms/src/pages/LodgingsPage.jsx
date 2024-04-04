@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "./templete.css";
 import Table from "../components/Table";
-export default function LodgingsPage({ accessToken }) {
+export default function LodgingsPage() {
     const [dataLodgings, setDataLodgings] = useState(null);
 
     const fetchLodgings = async () => {
@@ -11,7 +11,7 @@ export default function LodgingsPage({ accessToken }) {
                 method: "get",
                 url: "http://localhost:3000/lodgings",
                 headers: {
-                    Authorization: `Bearer ${accessToken}`,
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
             });
             // console.log(accessToken);

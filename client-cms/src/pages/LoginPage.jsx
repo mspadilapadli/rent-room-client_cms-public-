@@ -1,8 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
-
 import "./login.css";
-export default function LoginPage({ handleLogin }) {
+
+export default function LoginPage({ setStatusLogin }) {
     const [email, setEmail] = useState("admin@gmail.com");
     const [password, setPassword] = useState("12345");
 
@@ -10,7 +10,19 @@ export default function LoginPage({ handleLogin }) {
         e.preventDefault();
         try {
             // console.log(`submin jalan ni bos`);
-            handleLogin({ email, password });
+            // handleLogin({ email, password });
+            let { data } = await axios({
+                method: "post",
+                url: "http://localhost:3000/users/login",
+                data: {
+                    email: email,
+                    password: password,
+                },
+            });
+            localStorage.setItem("token", data.access_token);
+            // setAccessToken(data.access_token);
+            // setIsLogin(true); ganti
+            setStatusLogin(true);
         } catch (error) {
             console.log(error);
         }
@@ -64,9 +76,9 @@ export default function LoginPage({ handleLogin }) {
                     <button type="submit" className="btn btn-primary mt-5 mb-5">
                         Login
                     </button>
-                    <p className="text-center">
+                    {/* <p className="text-center">
                         Don’t have an account? <a href=""> Sign Up</a>
-                    </p>
+                    </p> */}
                 </form>
             </div>
         </>

@@ -1,5 +1,5 @@
 export default function Table({ e, i }) {
-    console.log(e);
+    // console.log(e);
     return (
         <>
             <tr>

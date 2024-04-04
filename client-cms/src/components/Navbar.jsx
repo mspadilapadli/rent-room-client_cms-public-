@@ -1,4 +1,9 @@
-export default function Navbar() {
+export default function Navbar({ setStatusLogin }) {
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        setStatusLogin(false);
+    };
+
     return (
         <>
             <nav className="navbar navbar-light bg-warning-subtle px-5">
@@ -9,6 +14,7 @@ export default function Navbar() {
                         <button
                             id="logout-button"
                             className="btn btn-outline-danger mx-3"
+                            onClick={handleLogout}
                         >
                             Logout
                         </button>
