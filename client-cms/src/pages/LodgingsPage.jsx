@@ -92,6 +92,9 @@ export default function LodgingsPage() {
                                                         e={e}
                                                         i={i}
                                                         key={e.id}
+                                                        fetchLodgings={
+                                                            fetchLodgings
+                                                        }
                                                     />
                                                 );
                                             })}

@@ -1,4 +1,29 @@
-export default function Table({ e, i }) {
+import { Link } from "react-router-dom";
+import showToast from "../utils/toast";
+import axios from "axios";
+
+export default function Table({ e, i, fetchLodgings }) {
+    console.log(e.id, "id ni boss");
+    async function hanldeDelete() {
+        try {
+            const response = await axios({
+                method: "DELETE",
+                url:
+                    "https://server-myroom.mspadilapadli-dev.online/lodgings/" +
+                    e.id,
+                // url: "http://localhost:3000/users/add-user",
+
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+            });
+            fetchLodgings();
+        } catch (error) {
+            console.log(error);
+            showToast(error.response.data.message);
+        }
+    }
+
     // console.log(e);
     return (
         <>
@@ -15,11 +40,16 @@ export default function Table({ e, i }) {
                 <td>{e.User.email}</td>
                 <td>
                     <span className="d-flex">
-                        <a href="" className="ms-3">
+                        <Link
+                            onClick={() => {
+                                hanldeDelete();
+                            }}
+                            className="ms-3"
+                        >
                             <span className="icon material-symbols-outlined text-danger">
                                 delete
                             </span>
-                        </a>
+                        </Link>
                         <a href="" className="ms-3">
                             <span className="icon material-symbols-outlined text-danger">
                                 edit
