@@ -32,7 +32,7 @@ export default function RegsiterPage() {
                 },
             });
             console.log("new data created");
-            console.log(input, "<<<input form");
+            // console.log(input, "<<<input form");
         } catch (error) {
             console.log(error);
             showToast(error.response.data.message);

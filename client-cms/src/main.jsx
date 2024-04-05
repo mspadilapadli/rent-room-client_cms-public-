@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
+// import "dotenv/config";
 // import './index.css'
 import "toastify-js/src/toastify.css";
 

@@ -3,6 +3,8 @@ import axios from "axios";
 import "./templete.css";
 import Table from "../components/Table";
 import showToast from "../utils/toast";
+import { Link } from "react-router-dom";
+// import "dotenv/config";
 
 export default function LodgingsPage() {
     const [dataLodgings, setDataLodgings] = useState(null);
@@ -13,6 +15,7 @@ export default function LodgingsPage() {
                 method: "get",
                 // url: "http://localhost:3000/lodgings",
                 url: "https://server-myroom.mspadilapadli-dev.online/lodgings",
+                // url: import.meta.env.VITE_API_URL + "/lodgings",
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
@@ -42,7 +45,8 @@ export default function LodgingsPage() {
                         <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                             <h1 className="display-2">Rooms</h1>
                             <div className="d-flex justify-content-center">
-                                <button
+                                <Link
+                                    to="/add-lodging"
                                     className="btn btn-primary rounded-pill "
                                     id="new-product"
                                 >
@@ -50,7 +54,7 @@ export default function LodgingsPage() {
                                         add
                                     </span>
                                     New Room
-                                </button>
+                                </Link>
                             </div>
                         </div>
 

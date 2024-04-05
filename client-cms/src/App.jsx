@@ -1,7 +1,7 @@
+// import "dotenv/config";
 import { useEffect, useState } from "react";
 import LoginPage from "./pages/LoginPage";
 import LodgingsPage from "./pages/LodgingsPage";
-import AddRoomPage from "./pages/AddRoomPage";
 import RegsiterPage from "./pages/RegisterPage";
 import Types from "./pages/TypesPage";
 import Navbar from "./components/Navbar";
@@ -11,6 +11,7 @@ import {
     RouterProvider,
 } from "react-router-dom";
 import MainLayout from "./components/MainLayout";
+import AddLodging from "./pages/AddLodgingPage";
 // import './App.css'
 // import "./pages/templete.css";
 
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
             {
                 path: "/register",
                 element: <RegsiterPage />,
+            },
+            {
+                path: "/add-lodging",
+                element: <AddLodging />,
             },
         ],
     },
