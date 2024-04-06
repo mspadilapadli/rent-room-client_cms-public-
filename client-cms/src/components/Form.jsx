@@ -1,9 +1,9 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import showToast from "../utils/toast";
 
-export default function Form() {
+export default function Form({ populate }) {
     const navigate = useNavigate();
     const [inputAdd, setInputAdd] = useState({
         name: "",
@@ -15,6 +15,11 @@ export default function Form() {
         typeId: null,
     });
 
+    // const id = populate? populate.id : 0
+    const isEdit = Boolean(populate?.id);
+
+    console.log(populate, "populate");
+    console.log(isEdit);
     const handleInputAdd = (event) => {
         const { name, value } = event.target;
         setInputAdd({
@@ -26,6 +31,23 @@ export default function Form() {
     const handlePostForm = async (event) => {
         event.preventDefault();
         try {
+            if (isEdit) {
+                const response = await axios({
+                    method: "put",
+                    url:
+                        "https://server-myroom.mspadilapadli-dev.online/lodgings/" +
+                        populate.id,
+                    // url: "http://localhost:3000/users/add-user",
+                    data: inputAdd,
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem(
+                            "token"
+                        )}`,
+                    },
+                });
+                navigate("/");
+                return;
+            }
             const response = await axios({
                 method: "post",
                 url: "https://server-myroom.mspadilapadli-dev.online/lodgings",
@@ -42,9 +64,14 @@ export default function Form() {
         }
     };
 
+    useEffect(() => {
+        if (populate) {
+            setInputAdd(populate);
+        }
+    }, [populate]);
     return (
         <>
-            <div>
+            {/* <div>
                 <div>name: {inputAdd.name} </div>
                 <div>facility: {inputAdd.facility} </div>
                 <div>roomCapacity: {inputAdd.roomCapacity} </div>
@@ -52,7 +79,7 @@ export default function Form() {
                 <div>location: {inputAdd.location} </div>
                 <div>price: {inputAdd.price} </div>
                 <div>typeId:{inputAdd.typeId} </div>
-            </div>
+            </div> */}
             <div className="row">
                 <div>
                     {/* className="col-12 col-md-6" */}
@@ -102,6 +129,7 @@ export default function Form() {
                                 className="form-select"
                                 required=""
                                 name="typeId"
+                                value={inputAdd.typeId}
                                 onChange={handleInputAdd}
                             >
                                 <option value="" selected="" disabled="">
@@ -203,7 +231,7 @@ export default function Form() {
                                     type="submit"
                                     href=""
                                 >
-                                    Submit
+                                    {isEdit ? "Update" : "Create"}
                                 </button>
                             </div>
                         </div>

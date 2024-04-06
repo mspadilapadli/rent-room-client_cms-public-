@@ -14,8 +14,8 @@ export default function LodgingsPage() {
             const { data } = await axios({
                 method: "get",
                 // url: "http://localhost:3000/lodgings",
-                url: "https://server-myroom.mspadilapadli-dev.online/lodgings",
-                // url: import.meta.env.VITE_API_URL + "/lodgings",
+                // url: "https://server-myroom.mspadilapadli-dev.online/lodgings",
+                url: import.meta.env.VITE_API_URL + "/lodgings",
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },

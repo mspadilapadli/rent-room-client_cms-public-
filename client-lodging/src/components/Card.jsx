@@ -1,12 +1,11 @@
-export default function Card({ e, hitDetail }) {
+import { Link } from "react-router-dom";
+export default function Card({ e }) {
     return (
         <>
             <div className="col">
                 <div
                     className="card"
-                    onClick={() => {
-                        hitDetail(e);
-                    }}
+                    // onClick={<Link to={`/lodgings/${e.id}`}>Detail</Link>}
                 >
                     <img
                         src={e.imgUrl}
@@ -21,14 +20,12 @@ export default function Card({ e, hitDetail }) {
                         <h5 className="card-title">{e.name}</h5>
                         <p className="card-text">Rp {e.price}</p>
                         <p className="card-text">Location : {e.location}</p>
-                        {/* <button
+                        <Link
                             className="btn btn-outline-warning"
-                            onClick={() => {
-                                hitDetail();
-                            }}
+                            to={`/lodgings/${e.id}`}
                         >
                             Detail
-                        </button> */}
+                        </Link>
                     </div>
                 </div>
             </div>

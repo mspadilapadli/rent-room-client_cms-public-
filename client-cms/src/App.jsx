@@ -12,6 +12,8 @@ import {
 } from "react-router-dom";
 import MainLayout from "./components/MainLayout";
 import AddLodging from "./pages/AddLodgingPage";
+import Update from "./pages/Update";
+import ImageUpdate from "./pages/ImageUpdate";
 // import './App.css'
 // import "./pages/templete.css";
 
@@ -41,6 +43,14 @@ const router = createBrowserRouter([
             {
                 path: "/add-lodging",
                 element: <AddLodging />,
+            },
+            {
+                path: "/update/img/:id",
+                element: <ImageUpdate />,
+            },
+            {
+                path: "/update/:id",
+                element: <Update />,
             },
         ],
     },
@@ -80,16 +90,16 @@ function App() {
     // };
     // console.log(accessToken, "<<<<<<");
 
-    const setStatusLogin = (status) => {
-        setIsLogin(status);
-    };
+    // const setStatusLogin = (status) => {
+    //     setIsLogin(status);
+    // };
 
     // use useEffect yg create / fetch data
-    useEffect(() => {
-        if (localStorage.getItem("token")) {
-            setIsLogin(true);
-        }
-    }, []);
+    // useEffect(() => {
+    //     if (localStorage.getItem("token")) {
+    //         setIsLogin(true);
+    //     }
+    // }, []);
 
     return (
         <>

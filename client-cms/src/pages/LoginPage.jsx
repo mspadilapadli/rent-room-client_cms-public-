@@ -1,12 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
-// import "./login.css";
+import style from "./login.module.css";
 import showToast from "../utils/toast";
 import { useNavigate } from "react-router-dom";
 
 export default function LoginPage({ setStatusLogin }) {
-    const [email, setEmail] = useState("admin@gmail.com");
-    const [password, setPassword] = useState("12345");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
     const submitLogin = async (e) => {
@@ -36,8 +36,11 @@ export default function LoginPage({ setStatusLogin }) {
 
     return (
         <>
-            <div className="container-fluid">
-                <form className="mx-auto" onSubmit={submitLogin}>
+            <div className="container">
+                <form
+                    className={`${style["form-login"]}  mx-auto`}
+                    onSubmit={submitLogin}
+                >
                     {/* {email} && {password} */}
                     {/* <h4 className="text-center">Welcome</h4> */}
                     <div className="d-flex justify-content-center">
@@ -79,7 +82,10 @@ export default function LoginPage({ setStatusLogin }) {
                             onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
-                    <button type="submit" className="btn btn-primary mt-5 mb-5">
+                    <button
+                        type="submit"
+                        className={`btn ${style[`btn-primary`]} my-5 `}
+                    >
                         Login
                     </button>
                     {/* <p className="text-center">

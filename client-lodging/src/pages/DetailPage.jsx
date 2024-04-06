@@ -1,4 +1,37 @@
-export default function DetailPage({ dataDetail, closeDetail }) {
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+
+export default function DetailPage() {
+    const params = useParams();
+    const [dataDetail, setDataDetail] = useState({});
+
+    async function fetchLodgingById() {
+        try {
+            let { data } = await axios({
+                method: "get",
+                // url: "http://localhost:3000/lodgings",
+                url:
+                    "https://server-myroom.mspadilapadli-dev.online/pub/lodgings/" +
+                    params.id,
+                // url: import.meta.env.VITE_API_URL + "/lodgings",
+                // headers: {
+                //     Authorization: `Bearer ${localStorage.getItem("token")}`,
+                // },
+            });
+            console.log(data, "<<<data");
+            setDataDetail(data);
+        } catch (error) {
+            console.log(error);
+            // showToast(error.response.data.message);
+        }
+    }
+
+    useEffect(() => {
+        fetchLodgingById();
+    }, []);
+
     return (
         <>
             <section id="detail">
@@ -23,14 +56,9 @@ export default function DetailPage({ dataDetail, closeDetail }) {
                             </div>
                         </div>
                     </div>
-                    <button
-                        className="btn btn-warning mt-2"
-                        onClick={() => {
-                            closeDetail();
-                        }}
-                    >
+                    <Link className="btn btn-outline-danger  mt-2" to={"/"}>
                         Back
-                    </button>
+                    </Link>
                 </div>
             </section>
         </>

@@ -3,7 +3,7 @@ import showToast from "../utils/toast";
 import axios from "axios";
 
 export default function Table({ e, i, fetchLodgings }) {
-    console.log(e.id, "id ni boss");
+    // console.log(e.id, "id ni boss");
     async function hanldeDelete() {
         try {
             const response = await axios({
@@ -50,16 +50,16 @@ export default function Table({ e, i, fetchLodgings }) {
                                 delete
                             </span>
                         </Link>
-                        <a href="" className="ms-3">
+                        <Link to={`/update/${e.id}`} className="ms-3">
                             <span className="icon material-symbols-outlined text-danger">
                                 edit
                             </span>
-                        </a>
-                        <a href="" className="ms-3">
+                        </Link>
+                        <Link to={`/update/img/${e.id}`} className="ms-3">
                             <span className="icon material-symbols-outlined text-danger">
                                 image
                             </span>
-                        </a>
+                        </Link>
                     </span>
                 </td>
             </tr>

@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import "./templete.css";
+import showToast from "../utils/toast";
+
 export default function Types() {
     const [dataTypes, setDataTypes] = useState(null);
 
@@ -8,15 +10,18 @@ export default function Types() {
         try {
             const { data } = await axios({
                 method: "get",
-                url: "http://localhost:3000/types",
+                url: import.meta.env.VITE_API_URL + `/types`,
+                // url: process.env.VITE_API_URL + `/types`,
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
             });
             // console.log(accessToken);
+            console.log(data, "data tpes");
             setDataTypes(data);
         } catch (error) {
             console.log(error);
+            showToast(error.response.data.message);
         }
     };
 

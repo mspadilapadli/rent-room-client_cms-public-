@@ -11,9 +11,7 @@ export default function AddLodging() {
                         id="new-product-section"
                     >
                         <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                            <h1 className="display-2">
-                                New Product / Update Product
-                            </h1>
+                            <h1 className="display-2">New Product</h1>
                         </div>
                         <Form />
                     </section>
