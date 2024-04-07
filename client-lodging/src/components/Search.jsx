@@ -1,9 +1,18 @@
 import { useState } from "react";
+// import showToast from "../../../client-cms/src/utils/toast";
 
 export default function Search() {
     const [search, setSerch] = useState("");
 
-    const handleIputSearch = (event) => {};
+    // const handleIputSearch = (event) => {};
+    const handleSubmitSeacrh = async (event) => {
+        event.prevenDefault();
+        try {
+        } catch (error) {
+            console.log(error);
+            //  showToast(error.response.data.message);
+        }
+    };
 
     return (
         <>
@@ -13,6 +22,7 @@ export default function Search() {
                     role="search"
                     action="/courses"
                     method="get"
+                    onSubmit={handleSubmitSeacrh}
                 >
                     <input
                         className="form-control me-2"
