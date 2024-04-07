@@ -5,37 +5,58 @@ import Search from "../components/Search";
 export default function HomePage() {
     const [pubLodgings, setPubLodgings] = useState(null);
     const [search, setSearch] = useState("");
-    const [filter, setFilter] = useState("");
+    // const [filter, setFilter] = useState("");
+    const [dataType, setDataTypes] = useState([]);
 
-    console.log(search, "<<<<search");
-    // const handleIputSearch = (event) => {};
-    const handleSubmitSearch = async (e) => {
-        console.log("masuk di handle submit");
-        console.log(search, "<<<<search2");
-        e.preventDefault();
+    const fetchTypes = async () => {
         try {
-            fetchData();
-            // const { data } = await axios({
-            //     method: "get",
-            //     // url: "http://localhost:3000/pub/lodgings",
-            //     url: `https://server-myroom.mspadilapadli-dev.online/pub/lodgings?search=${search}`,
-            //     // data: { search: search },
-            // });
-            // console.log(data, "submitsearch");
-            // setPubLodgings(data);
+            const { data } = await axios({
+                method: "get",
+                url: `https://server-myroom.mspadilapadli-dev.online/types`,
+                // url: process.env.VITE_API_URL + `/types`,
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+            });
+
+            // const inputFilter = [
+            //     ...data,
+            //     {
+            //         id: "",
+            //         name: "All",
+            //     },
+            // ];
+
+            // console.log(accessToken);
+            // console.log(inputFilter, "data tpes");
+            setDataTypes(data);
         } catch (error) {
             console.log(error);
-            //  showToast(error.response.data.message);
+            showToast(error.response.data.message);
         }
     };
 
-    const fetchData = async () => {
+    const handleSubmitSearch = async (e) => {
+        e.preventDefault();
+        await fetchData(search);
+    };
+
+    const handleFilter = async (e) => {
+        // e.preventDefault();
+        console.log(e, "filter");
+        await fetchData(search, e);
+    };
+
+    const fetchData = async (search, filter, sort, pagination) => {
         try {
             const { data } = await axios({
                 method: "get",
                 // url: "http://localhost:3000/pub/lodgings",
-                url: `https://server-myroom.mspadilapadli-dev.online/pub/lodgings?search=${search}`,
-                // data: { search: search },
+                url: `https://server-myroom.mspadilapadli-dev.online/pub/lodgings`,
+                params: {
+                    search: search,
+                    filter: filter,
+                },
             });
 
             setPubLodgings(data);
@@ -47,13 +68,15 @@ export default function HomePage() {
     // fetch get (useEffect create)
     useEffect(() => {
         fetchData();
+        fetchTypes();
     }, []);
 
     return (
         <>
             <div className="container my-5">
                 <h2 className="text-center my-5">MyRent Room</h2>
-                <div className="mb-3 mt-3">
+                <div className="mb-3 mt-3 d-flex align-items-center gap-2">
+                    {/* se */}
                     <form
                         className="d-flex"
                         role="search"
@@ -69,13 +92,74 @@ export default function HomePage() {
                             onChange={(e) => setSearch(e.target.value)}
                         />
                         <button
-                            className="btn btn-outline-success"
+                            className="btn btn-outline-warning"
                             type="submit"
                         >
                             Search
                         </button>
                     </form>
+                    {/* end form */}
+
+                    {/* filter */}
+
+                    {/* Example single danger button */}
+                    {/* <div className="btn-group">
+                        <button
+                            type="button"
+                            className="btn btn-warning dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                        >
+                            Filter by Type
+                        </button>
+                        <ul className="dropdown-menu">
+                            {dataType &&
+                                dataType.map((e) => {
+                                    return (
+                                        <li
+                                            style={{ cursor: "pointer" }}
+                                            key={e.id}
+                                        >
+                                            <div
+                                                className="dropdown-item "
+                                                onClick={() =>
+                                                    handleFilter(e.id)
+                                                }
+                                            >
+                                                {e.name}
+                                            </div>
+                                        </li>
+                                    );
+                                })}
+                        </ul>
+                    </div> */}
+
+                    <div className="">
+                        <select
+                            id="product-category"
+                            className="form-select "
+                            style={{ borderColor: "#ffc107", color: "#ffc107" }}
+                            required=""
+                            name="typeId"
+                            onChange={(e) => handleFilter(e.target.value)}
+                        >
+                            <option disabled selected>
+                                Filter by Type
+                            </option>
+                            <option value="">All</option>
+                            {dataType &&
+                                dataType.map((e) => {
+                                    return (
+                                        <option value={e.id} key={e.id}>
+                                            {e.name}
+                                        </option>
+                                    );
+                                })}
+                        </select>
+                    </div>
+                    {/* end filter */}
                 </div>
+
                 <div className="row row-cols-4 g-3">
                     {pubLodgings &&
                         pubLodgings.map((e) => {
