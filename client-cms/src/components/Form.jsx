@@ -18,8 +18,8 @@ export default function Form({ populate }) {
     // const id = populate? populate.id : 0
     const isEdit = Boolean(populate?.id);
 
-    console.log(populate, "populate");
-    console.log(isEdit);
+    // console.log(populate, "populate");
+    // console.log(isEdit);
     const handleInputAdd = (event) => {
         const { name, value } = event.target;
         setInputAdd({

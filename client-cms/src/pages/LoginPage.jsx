@@ -27,7 +27,7 @@ export default function LoginPage({ setStatusLogin }) {
             navigate("/");
             // setAccessToken(data.access_token);
             // setIsLogin(true); ganti
-            setStatusLogin(true);
+            // setStatusLogin(true);
         } catch (error) {
             console.log(error);
             showToast(error.response.data.message);

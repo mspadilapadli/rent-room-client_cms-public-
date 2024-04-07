@@ -4,6 +4,8 @@ import "./templete.css";
 import Table from "../components/Table";
 import showToast from "../utils/toast";
 import { Link } from "react-router-dom";
+import Search from "../../../client-lodging/src/components/Search";
+
 // import "dotenv/config";
 
 export default function LodgingsPage() {
