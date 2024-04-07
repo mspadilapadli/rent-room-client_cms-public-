@@ -5,6 +5,7 @@ import Search from "../components/Search";
 export default function HomePage() {
     const [pubLodgings, setPubLodgings] = useState(null);
     const [search, setSearch] = useState("");
+    const [filter, setFilter] = useState("");
 
     console.log(search, "<<<<search");
     // const handleIputSearch = (event) => {};
