@@ -2,11 +2,14 @@ import { useEffect, useState } from "react";
 import Card from "../components/Card";
 import axios, { getAdapter } from "axios";
 import Search from "../components/Search";
+import { Link } from "react-router-dom";
+
 export default function HomePage() {
     const [pubLodgings, setPubLodgings] = useState(null);
     const [search, setSearch] = useState("");
     const [filterByType, setFilterByType] = useState("");
     const [otherSortFilter, setOtherSortFilter] = useState("");
+    const [by, setBy] = useState("");
     const [desc, setDesc] = useState(false);
     const otherFilter = [
         { name: "Id", id: "id" },
@@ -22,6 +25,7 @@ export default function HomePage() {
     // const [filter, setFilter] = useState("");
     const [dataType, setDataTypes] = useState([]);
     const [dataFetch, setDataFetch] = useState({});
+    const [pageNumber, setPageNumber] = useState("");
 
     const fetchTypes = async () => {
         try {
@@ -70,10 +74,17 @@ export default function HomePage() {
     };
 
     const handleSortBy = async (by) => {
+        setBy(by);
         await fetchData(search, filterByType, by + otherSortFilter);
     };
 
-    const fetchData = async (search, filter, sort, pagination) => {
+    const hanldePaging = async (i) => {
+        setPageNumber(i);
+        console.log(pageNumber, "numberpage");
+        await fetchData(search, filterByType, by + otherSortFilter, i);
+    };
+
+    const fetchData = async (search, filter, sort, page) => {
         try {
             const { data } = await axios({
                 method: "get",
@@ -83,7 +94,8 @@ export default function HomePage() {
                     search: search,
                     filter: filter,
                     sort: sort,
-                    page[number] :
+                    // default page[size] = 10 (di BE)
+                    page: { size: "", number: pageNumber },
                 },
             });
 
@@ -207,7 +219,48 @@ export default function HomePage() {
                     {/*  end sort */}
                 </div>
                 {/* pagintion */}
-                
+                <div>
+                    <nav aria-label="Page navigation example">
+                        <ul className="pagination">
+                            <li className="page-item">
+                                <label
+                                    className="page-link"
+                                    href="#"
+                                    style={{
+                                        color: "#ffc107",
+                                    }}
+                                >
+                                    Pages
+                                </label>
+                            </li>
+                            {dataFetch.totalPage &&
+                                Array.from(
+                                    { length: dataFetch.totalPage },
+                                    (_, i) => i + 1
+                                ).map((pageNumber, i) => (
+                                    <li className="page-item" key={i}>
+                                        <Link
+                                            style={{
+                                                color: "#ffc107",
+                                            }}
+                                            className="page-link"
+                                            onClick={() => {
+                                                hanldePaging(pageNumber);
+                                            }}
+                                        >
+                                            {pageNumber}
+                                        </Link>
+                                    </li>
+                                ))}
+
+                            {/* <li className="page-item">
+                                <a className="page-link" href="#">
+                                    Next
+                                </a>
+                            </li> */}
+                        </ul>
+                    </nav>
+                </div>
                 {/* end pagintion */}
 
                 <div className="row row-cols-4 g-3">

@@ -23,6 +23,7 @@ export default function LoginPage({ setStatusLogin }) {
                     password: password,
                 },
             });
+            console.log(data, "respons login");
             localStorage.setItem("token", data.access_token);
             navigate("/");
             // setAccessToken(data.access_token);

@@ -16,9 +16,9 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-    const [page, setPage] = useState(`home`);
-    const [isDetail, setIsDetail] = useState(false);
-    const [dataDetail, setDataDetail] = useState({});
+    // const [page, setPage] = useState(`home`);
+    // const [isDetail, setIsDetail] = useState(false);
+    // const [dataDetail, setDataDetail] = useState({});
 
     // function hitDetail(data) {
     //     setPage(``);
