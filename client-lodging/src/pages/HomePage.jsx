@@ -5,8 +5,23 @@ import Search from "../components/Search";
 export default function HomePage() {
     const [pubLodgings, setPubLodgings] = useState(null);
     const [search, setSearch] = useState("");
+    const [filterByType, setFilterByType] = useState("");
+    const [otherSortFilter, setOtherSortFilter] = useState("");
+    const [desc, setDesc] = useState(false);
+    const otherFilter = [
+        { name: "Id", id: "id" },
+        { name: "Facility", id: "facility" },
+        { name: "Room Capacity", id: "roomCapacity" },
+        { name: "Location", id: "location" },
+        { name: "Price", id: "price" },
+    ];
+    const sortFilter = [
+        { name: "ASC", id: "" },
+        { name: "DESC", id: "-" },
+    ];
     // const [filter, setFilter] = useState("");
     const [dataType, setDataTypes] = useState([]);
+    const [dataFetch, setDataFetch] = useState({});
 
     const fetchTypes = async () => {
         try {
@@ -41,10 +56,21 @@ export default function HomePage() {
         await fetchData(search);
     };
 
-    const handleFilter = async (e) => {
+    const handleFilter = async (id) => {
         // e.preventDefault();
-        console.log(e, "filter");
-        await fetchData(search, e);
+        // console.log(id, "filter");
+        setFilterByType(id);
+        await fetchData(search, id);
+    };
+
+    const handleOtherFilter = async (id) => {
+        // e.preventDefault();
+        setOtherSortFilter(id);
+        await fetchData(search, filterByType, id);
+    };
+
+    const handleSortBy = async (by) => {
+        await fetchData(search, filterByType, by + otherSortFilter);
     };
 
     const fetchData = async (search, filter, sort, pagination) => {
@@ -56,10 +82,14 @@ export default function HomePage() {
                 params: {
                     search: search,
                     filter: filter,
+                    sort: sort,
+                    page[number] :
                 },
             });
 
-            setPubLodgings(data);
+            console.log(data, "lodgigns");
+            setDataFetch(data);
+            setPubLodgings(data.data);
         } catch (error) {
             console.log(error);
         }
@@ -101,39 +131,6 @@ export default function HomePage() {
                     {/* end form */}
 
                     {/* filter */}
-
-                    {/* Example single danger button */}
-                    {/* <div className="btn-group">
-                        <button
-                            type="button"
-                            className="btn btn-warning dropdown-toggle"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false"
-                        >
-                            Filter by Type
-                        </button>
-                        <ul className="dropdown-menu">
-                            {dataType &&
-                                dataType.map((e) => {
-                                    return (
-                                        <li
-                                            style={{ cursor: "pointer" }}
-                                            key={e.id}
-                                        >
-                                            <div
-                                                className="dropdown-item "
-                                                onClick={() =>
-                                                    handleFilter(e.id)
-                                                }
-                                            >
-                                                {e.name}
-                                            </div>
-                                        </li>
-                                    );
-                                })}
-                        </ul>
-                    </div> */}
-
                     <div className="">
                         <select
                             id="product-category"
@@ -158,7 +155,60 @@ export default function HomePage() {
                         </select>
                     </div>
                     {/* end filter */}
+
+                    {/* advance filter */}
+                    <div className="">
+                        <select
+                            id="product-category"
+                            className="form-select "
+                            style={{ borderColor: "#ffc107", color: "#ffc107" }}
+                            required=""
+                            name="typeId"
+                            onChange={(e) => handleOtherFilter(e.target.value)}
+                        >
+                            <option disabled selected>
+                                Other Filter
+                            </option>
+
+                            {otherFilter.map((e) => {
+                                return (
+                                    <option value={e.id} key={e.id}>
+                                        {e.name}
+                                    </option>
+                                );
+                            })}
+                        </select>
+                    </div>
+                    {/*  end advance filter */}
+
+                    {/* sort */}
+                    <div className="">
+                        <select
+                            id="product-category"
+                            className="form-select "
+                            style={{ borderColor: "#ffc107", color: "#ffc107" }}
+                            required=""
+                            name="sort"
+                            onChange={(e) => handleSortBy(e.target.value)}
+                        >
+                            <option disabled selected>
+                                Sort by
+                            </option>
+
+                            {sortFilter.map((e) => {
+                                return (
+                                    <option value={e.id} key={e.id}>
+                                        {e.name}
+                                    </option>
+                                );
+                            })}
+                        </select>
+                    </div>
+                    {/*  end sort */}
                 </div>
+                {/* pagintion */}
+                
+                {/* end pagintion */}
 
                 <div className="row row-cols-4 g-3">
                     {pubLodgings &&
