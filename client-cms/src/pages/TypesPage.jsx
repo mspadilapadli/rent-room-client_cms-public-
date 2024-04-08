@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import "./templete.css";
 import showToast from "../utils/toast";
+import { Link } from "react-router-dom";
 
 export default function Types() {
     const [dataTypes, setDataTypes] = useState(null);
@@ -41,15 +42,16 @@ export default function Types() {
                         <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                             <h1 className="display-2">Types</h1>
                             <div className="d-flex justify-content-center">
-                                <button
+                                <Link
+                                    to="/add-type"
                                     className="btn btn-primary rounded-pill "
                                     id="new-product"
                                 >
                                     <span className="icon material-symbols-outlined">
                                         add
                                     </span>
-                                    New Room
-                                </button>
+                                    New Type
+                                </Link>
                             </div>
                         </div>
 

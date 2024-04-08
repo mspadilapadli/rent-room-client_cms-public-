@@ -230,7 +230,7 @@ export default function HomePage() {
                                         color: "#ffc107",
                                     }}
                                 >
-                                    Pages
+                                    Page
                                 </label>
                             </li>
                             {dataFetch.totalPage &&

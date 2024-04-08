@@ -14,6 +14,7 @@ import MainLayout from "./components/MainLayout";
 import AddLodging from "./pages/AddLodgingPage";
 import Update from "./pages/Update";
 import ImageUpdate from "./pages/ImageUpdate";
+import AddType from "./pages/AddType";
 // import './App.css'
 // import "./pages/templete.css";
 
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
             {
                 path: "/add-lodging",
                 element: <AddLodging />,
+            },
+            {
+                path: "/add-type",
+                element: <AddType />,
             },
             {
                 path: "/update/img/:id",
