@@ -9,7 +9,7 @@ body {
     background: rgb(225, 230, 229);
     font-family: "Poppins", sans-serif;
 }
-form {
+.form-login {
     border-radius: 20px;
     margin-top: 110px !important;
     width: 24% !important;
@@ -19,9 +19,9 @@ form {
 
 .btn-primary {
     width: 100%;
-    border: none;
+    /* border: none; */
     border-radius: 50px;
-    background: rgb(173, 85, 173);
+    background: rgb(252, 235, 50);
 }
 
 .form-control {
