@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import showToast from "../utils/toast";
+import CancelButton from "./Button";
 
 export default function Form({ populate }) {
     const navigate = useNavigate();
@@ -218,12 +219,13 @@ export default function Form({ populate }) {
                         </div>
                         <div className="row mt-5 mb-3">
                             <div className="col-6">
-                                <a
+                                <CancelButton />
+                                {/* <a
                                     className="btn btn-lg btn-light rounded-pill w-100 p-2"
                                     href=""
                                 >
                                     Cancel
-                                </a>
+                                </a> */}
                             </div>
                             <div className="col-6">
                                 <button

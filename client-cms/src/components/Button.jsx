@@ -1,18 +1,19 @@
 import { useNavigate } from "react-router-dom";
-const navigate = useNavigate();
+
 export default function CancelButton() {
+    const navigate = useNavigate();
+
+    const handleCancle = () => {
+        navigate("/");
+    };
     return (
         <>
-            <div className="col-6">
-                <button
-                    className="btn btn-lg btn-light rounded-pill w-100 p-2"
-                    onClick={() => {
-                        navigate("/");
-                    }}
-                >
-                    Cancel
-                </button>
-            </div>
+            <button
+                className="btn btn-lg btn-light rounded-pill w-100 p-2"
+                onClick={handleCancle}
+            >
+                Cancel
+            </button>
         </>
     );
 }

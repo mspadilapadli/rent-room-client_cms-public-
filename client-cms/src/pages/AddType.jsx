@@ -1,5 +1,8 @@
 import { useState } from "react";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import showToast from "../utils/toast";
+import CancelButton from "../components/Button";
 
 export default function AddType() {
     const navigate = useNavigate();
@@ -18,9 +21,11 @@ export default function AddType() {
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
             });
-
+            console.log("add type succes");
             navigate("/types");
-        } catch (error) {}
+        } catch (error) {
+            console.error;
+        }
     };
     return (
         <>
@@ -68,12 +73,16 @@ export default function AddType() {
 
                                     <div className="row mt-5 mb-3">
                                         <div className="col-6">
-                                            <a
+                                            <CancelButton />
+                                            {/* <button
                                                 className="btn btn-lg btn-light rounded-pill w-100 p-2"
                                                 href=""
+                                                onClick={() =>
+                                                    navigate("/types")
+                                                }
                                             >
                                                 Cancel
-                                            </a>
+                                            </button> */}
                                         </div>
                                         <div className="col-6">
                                             <button
