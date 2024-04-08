@@ -46,10 +46,10 @@ export default function LodgingsPage() {
                     >
                         <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                             <h1 className="display-2">Rooms</h1>
-                            <div className="d-flex justify-content-center">
+                            <div className="d-flex justify-content-center ">
                                 <Link
                                     to="/add-lodging"
-                                    className="btn btn-primary rounded-pill "
+                                    className="btn btn-warning rounded-pill "
                                     id="new-product"
                                 >
                                     <span className="icon material-symbols-outlined">

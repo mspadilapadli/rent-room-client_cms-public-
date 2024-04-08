@@ -1,8 +1,11 @@
 import { useState } from "react";
 import showToast from "../utils/toast";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function RegsiterPage() {
+    const navigate = useNavigate();
+
     const [input, setInput] = useState({
         username: "",
         email: "",
@@ -32,7 +35,9 @@ export default function RegsiterPage() {
                 },
             });
             console.log("new data created");
+            showToast("new user created");
             // console.log(input, "<<<input form");
+            navigate("/");
         } catch (error) {
             console.log(error);
             showToast(error.response.data.message);
@@ -153,7 +158,7 @@ export default function RegsiterPage() {
                                     />
                                 </div>
                                 <button
-                                    className="btn btn-lg btn-primary rounded-pill w-100 p-2 mt-3"
+                                    className="btn btn-lg btn-warning rounded-pill w-100 p-2 mt-3"
                                     type="submit"
                                 >
                                     Sign Up

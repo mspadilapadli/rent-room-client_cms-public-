@@ -44,7 +44,7 @@ export default function Types() {
                             <div className="d-flex justify-content-center">
                                 <Link
                                     to="/add-type"
-                                    className="btn btn-primary rounded-pill "
+                                    className="btn btn-warning rounded-pill "
                                     id="new-product"
                                 >
                                     <span className="icon material-symbols-outlined">

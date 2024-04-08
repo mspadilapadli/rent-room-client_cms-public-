@@ -17,6 +17,7 @@ export default function Table({ e, i, fetchLodgings }) {
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
             });
+            showToast("data has been deleted");
             fetchLodgings();
         } catch (error) {
             console.log(error);

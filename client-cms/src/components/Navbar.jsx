@@ -20,12 +20,39 @@ export default function Navbar({ setStatusLogin }) {
                             alt=""
                         />
 
-                        <Link to="/" className="align-center">
+                        <Link
+                            to="/"
+                            className="align-center"
+                            style={{
+                                color: "rgb(96 73 4)",
+                            }}
+                        >
                             Lodgings
                         </Link>
-                        <Link to="/types">Types</Link>
-                        <Link to="/login">Login</Link>
-                        <Link to="/register">Register</Link>
+                        <Link
+                            to="/types"
+                            style={{
+                                color: "rgb(96 73 4)",
+                            }}
+                        >
+                            Types
+                        </Link>
+                        <Link
+                            to="/login"
+                            style={{
+                                color: "rgb(96 73 4)",
+                            }}
+                        >
+                            Login
+                        </Link>
+                        <Link
+                            to="/register"
+                            style={{
+                                color: "rgb(96 73 4)",
+                            }}
+                        >
+                            Register
+                        </Link>
                     </div>
                     <div className="d-flex align-items-center">
                         <div id="username">Hello, Padila</div>

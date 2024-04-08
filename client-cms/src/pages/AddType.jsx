@@ -24,7 +24,8 @@ export default function AddType() {
             console.log("add type succes");
             navigate("/types");
         } catch (error) {
-            console.error;
+            console.log(error);
+            showToast(error.response.data.message);
         }
     };
     return (
@@ -86,7 +87,7 @@ export default function AddType() {
                                         </div>
                                         <div className="col-6">
                                             <button
-                                                className="btn btn-lg btn-primary rounded-pill w-100 p-2"
+                                                className="btn btn-lg btn-warning rounded-pill w-100 p-2"
                                                 type="submit"
                                             >
                                                 Add
